@@ -30,20 +30,27 @@
        <form method="post" action="https://webdevbasics.net/scripts/adoptionsite.php"></form>
 
         <form>
-            <label for="myName">Name:</label>
+            <label for="myName">Name*:</label>
             <input type="text" name="myName" id="myName">
-            <label for="myName">Spouse Name:</label>
-            <input type="text" name="myName" id="myName">
-            <label for="myPhone">Primary Phone:</label>
-            <input type="text" name="myPhone" id="myPhone" maxlength="15">
-            <label for="myEmail">Email:</label>
-            <input type="text" name="myEmail" id="myEmail">
-            <label for="myAddress">Street Address:</label>
+            
+            <label for="mySpouseName">Spouse Name:</label>
+            <input type="text" name="mySpouseName" id="mySpouseName">
+
+            <label for="myPhone">Primary Phone*:</label>
+            <input type="number" name="myPhone" id="myPhone" maxlength="15">
+
+            <label for="myEmail">Email*:</label>
+            <input type="email" name="myEmail" id="myEmail">
+
+            <label for="myAddress">Street Address*:</label>
             <input type="text" name="myAddress" id="myAddress">
-            <label for="myCity">City:</label>
+
+            <label for="myCity">City*:</label>
             <input type="text" name="myCity" id="myCity">
-            <label for="myZip">Zip Code:</label>
-            <input type="text" name="myZip" id="myZip" maxlength="5">
+
+            <label for="myZip">Zip Code*:</label>
+            <input type="number" name="myZip" id="myZip" maxlength="5">
+
             <h5>Interested In</h5><br>
             <input type="checkbox" name="adopt" id="adopt" value="yes">Adopting a child<br>
             <input type="checkbox" name="place" id="place" value="yes">Placing a child<br>
@@ -58,7 +65,8 @@
             <label for="myMessage">Message</label>
             <textarea name="myMessage" id="myMessage" rows="10" cols="10">
             </textarea>
-            <input type="submit" value="Apply Now" id="mySubmit">
+            <input type="submit" onclick="testformcompleteness()" value="Apply Now" id="mySubmit">
+            
         </form>
     </main>
     <br>
@@ -73,7 +81,14 @@
                     throw "Please enter your name.";
                 }
             }
-                
+                    catch(NameError) { 
+                        window.alert(NameError) 
+                        return false;
+                    } 
+                    finally {
+                        NameValid = true;
+                    }
+                    return true;
                 }
 
         function validatePhone() { 
@@ -92,6 +107,83 @@
                     }
                     return true;
                 }       
+
+        function validateEmail() { 
+            try {
+                var Email = document.getElementById("myEmail").value; 
+                if (Email === "") {
+                    throw "Please enter your email.";
+                }
+            }
+                    catch(EmailError) { 
+                        window.alert(EmailError) 
+                        return false;
+                    } 
+                    finally {
+                        NameEmail = true;
+                    }
+                    return true;
+                }
+            
+        function validateAddress() { 
+            try {
+                var Address = document.getElementById("myAddress").value; 
+                if (Address === "") {
+                    throw "Please enter your address.";
+                }
+            }
+                    catch(AddressError) { 
+                        window.alert(AddressError) 
+                        return false;
+                    } 
+                    finally {
+                        AddressValid = true;
+                    }
+                    return true;
+                }
+
+        function validateCity() { 
+            try {
+                var City = document.getElementById("myCity").value; 
+                if (City === "") {
+                    throw "Please enter your city.";
+                }
+            }
+            catch(CityError) { 
+                window.alert(CityError) 
+                return false;
+            } 
+            finally {
+                CityValid = true;
+                }
+                return true;
+            }
+
+        function validateZip() { 
+            try {
+                var Zip = document.getElementById("myZip"); 
+                if (Zip.value === "") {
+                    throw "Please enter your Zip Code.";
+                }
+            }
+                    catch(ZipError) { 
+                        window.alert(ZipError) 
+                        return false;
+                    } 
+                    finally {
+                        ZipValid = true;
+                    }
+                    return true;
+                }       
+
+        function testformcompleteness(){
+            validateName()
+            validatePhone()
+            validateEmail()
+            validateAddress()
+            validateCity()
+            validateZip()
+        }
 
 
     </script>
